@@ -17,10 +17,12 @@ def display_data(csv_file, title):
         return None
 
 # Function to display plots (modified for wider layout)
-def display_plot(plot_title, plot_function, col):
+def display_plot(plot_title, plot_function, col, description=None):
     with col:
         st.subheader(plot_title)
         st.plotly_chart(plot_function(), use_container_width=True)
+    if description:  # Only display description if it's provided
+        col.write(description) # or col.markdown(f"<small>{description}</small>", unsafe_allow_html=True) for smaller text
 
 # Main Streamlit App
 def main():
@@ -207,20 +209,20 @@ def main():
         return fig
     # Grid Layout for Plots
     col1, col2 = st.columns(2)
-    display_plot("Average Stars Distribution Plot", plot_average_star_distribution, col1)
-    display_plot("Average Useful Funny Cool per Star Rating", plot_average_useful_funny_cool, col2)
+    display_plot("Average Stars Distribution Plot", plot_average_star_distribution, col1, "This chart displays the overall pattern of star ratings given by users. We can observe which star ratings are most common and least common, which can provide insights into the general positivity or negativity of reviews within the dataset. The x-axis represents the star rating, and the y-axis represents the number of reviews.")
+    display_plot("Average Useful Funny Cool per Star Rating", plot_average_useful_funny_cool, col2, "This chart allows us to analyze how the perceived helpfulness, humor, and coolness of reviews relate to the overall star rating given. By comparing the average 'useful,' 'funny,' and 'cool' ratings across star categories, we can identify potential trends. For example, we might see if higher-rated reviews tend to be considered more useful or if lower-rated reviews are perceived as less funny. The x-axis represents the star rating, and the y-axis represents the average rating for each attribute.")
 
     col3, col4 = st.columns(2)
-    display_plot("Average Review Length", plot_average_review_length, col3)
-    display_plot("Correlation Matrix", plot_correlation_matrix, col4)
+    display_plot("Average Review Length", plot_average_review_length, col3, "This chart explores whether the length of a review is associated with the star rating given. We can observe if reviews with higher or lower star ratings tend to be longer or shorter on average. This analysis may provide insights into user behavior and how much detail users provide when expressing different levels of satisfaction. The x-axis represents the star rating, and the y-axis represents the average review length.")
+    display_plot("Correlation Matrix", plot_correlation_matrix, col4, "This chart examines the relationships between different aspects of review characteristics. By analyzing the correlation coefficients, we can identify which attributes tend to vary together. For example, we can observe the correlation between 'useful,' 'funny,' and 'cool' ratings to see if reviews considered helpful are also often considered funny or cool. Understanding these relationships can provide insights into how users perceive and interact with reviews. The axes represent the review attributes, and the color values represent the correlation coefficients.")
 
     col5, col6 = st.columns(2)
-    display_plot("Top 5 Most Reviewed Businesses", plot_top_businesses, col5)
-    display_plot("Review Length Distribution", plot_review_length_distribution, col6)
+    display_plot("Top 5 Most Reviewed Businesses", plot_top_businesses, col5, "This chart identifies the businesses that have garnered the most attention from users, as measured by the number of reviews. Comparing the review counts can provide insights into business popularity, visibility, or engagement with the user community. The x-axis represents the business names, and the y-axis represents the number of reviews")
+    display_plot("Review Length Distribution", plot_review_length_distribution, col6, "This chart explores the distribution of review lengths to understand how detailed or concise user reviews tend to be. We can observe the most common review lengths, the range of lengths, and whether there are any outliers (very short or very long reviews). This analysis might reveal insights into user writing habits or platform usage. The x-axis represents review length, and the y-axis represents the count of reviews.")
 
     col7, col8 = st.columns(2)
-    display_plot("Top 5 Most Active Users", plot_top_users, col7)
-    display_plot("Review Sentiment Distribution", plot_sentiment_distribution, col8)
+    display_plot("Top 5 Most Active Users", plot_top_users, col7, "This chart identifies the users who have generated the most content, as measured by the number of reviews. Comparing the review counts can provide insights into user engagement, contribution patterns, and potential influence within the platform's community. The x-axis represents the user names, and the y-axis represents the number of reviews.")
+    display_plot("Review Sentiment Distribution", plot_sentiment_distribution, col8, "This chart illustrates the overall sentiment composition of the review dataset. By examining the proportions of positive, negative, and neutral reviews, we can gain insights into the general tone and opinions expressed by users. A high proportion of positive reviews might suggest overall user satisfaction, while a high proportion of negative reviews might indicate areas for improvement. The percentages displayed in the chart provide a quantitative measure of sentiment prevalence.")
 
 if __name__ == "__main__":
     main()
