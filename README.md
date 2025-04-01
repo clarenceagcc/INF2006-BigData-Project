@@ -62,4 +62,15 @@ After getting all of our Datasets processed, we need to do some filtering for us
 
 ## Running our Visualization
 We are mainly leveraging on plotly to do our interactive plotting, so we are hosting it on Streamlit because its easy to create an interface to display everything
+1. Install the requirements.txt
+   ```
+   pip -r install requirements.txt
+   # there may be some other libraries missed if so,
+   pip install <missing library>
+   ```
+2. Run our code, we already placed the required .csv for visualization
+   ```
+   streamlit run Home.py
+   ```
+
 
