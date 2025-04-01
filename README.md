@@ -2,6 +2,8 @@
 
 This project analyzes and visualizes the Yelp Open Dataset to gain insights into user reviews, business information, and other related data. It utilizes Apache Hadoop and Spark for data processing and filtering, and Streamlit with Plotly for interactive visualizations.
 
+Here is the site hosted : https://inf2006-bigdata-project.streamlit.app/
+
 ## Project Overview
 
 The workflow consists of three main stages:
