@@ -19,10 +19,12 @@ def display_data(csv_file, title):
         return None
 
 # Function to display plots (modified for wider layout)
-def display_plot(plot_title, plot_function, col):
+def display_plot(plot_title, plot_function, col, description=None):
     with col:
         st.subheader(plot_title)
         st.plotly_chart(plot_function(), use_container_width=True)
+    if description:  # Only display description if it's provided
+        col.write(description) # or col.markdown(f"<small>{description}</small>", unsafe_allow_html=True) for smaller text
 
 # Main Streamlit App
 def main():
@@ -253,23 +255,23 @@ def main():
 
     # Grid Layout for Plots
     col1, col2 = st.columns(2)
-    display_plot("Average Stars Distribution Plot", plot_average_ratings_by_state, col1)
-    display_plot("Average Useful Funny Cool per Star Rating", plot_top_10_reviewed_businesses, col2)
+    display_plot("Average Stars Distribution Plot", plot_average_ratings_by_state, col1, "This bar chart displays the average star rating of businesses across different U.S. states. It allows us to compare which states tend to have higher customer satisfaction based on review ratings. For example, states like California and Idaho may stand out with higher average ratings, suggesting generally better-reviewed businesses there.")
+    display_plot("Average Useful Funny Cool per Star Rating", plot_top_10_reviewed_businesses, col2, "This horizontal bar chart highlights the businesses that received the highest total number of reviews. These are likely to be popular or high-traffic establishments. A business like “Pat's King of Steaks” leads with over 4000 reviews, indicating strong customer engagement and visibility.")
 
     col3, col4 = st.columns(2)
-    display_plot("Distribution of Business Ratings", plot_distribution_of_business_ratings, col3)
-    display_plot("Correlation Matrix", plot_tips_over_years, col4)
+    display_plot("Distribution of Business Ratings", plot_distribution_of_business_ratings, col3, "This histogram provides a frequency distribution of star ratings across all businesses. It shows whether ratings are normally distributed or skewed. In this dataset, the chart likely shows a right-skew with more 4–5 star reviews, suggesting generally positive customer sentiment.")
+    display_plot("Correlation Matrix", plot_tips_over_years, col4, "This line chart tracks the number of user-submitted tips over time. It helps us understand engagement trends — whether users are leaving more or fewer tips as years go by. Spikes or drops in certain years could correlate with external events or platform changes.")
 
     col5, col6 = st.columns(2)
-    display_plot("Top 10 Buisness Categories", plot_top_10_business_categories, col5)
-    display_plot("Correlation Matrix", plot_numeric_metrics_correlation, col6)
+    display_plot("Top 10 Buisness Categories", plot_top_10_business_categories, col5, "This bar chart identifies the most common categories businesses fall into, such as Restaurants or Shopping. It offers a quick look at the market landscape and which types of services dominate the dataset.")
+    display_plot("Correlation Matrix", plot_numeric_metrics_correlation, col6, "This heatmap shows how strongly different numerical variables relate to each other, such as stars, review_count, and compliment_count. Lighter colors and higher values (closer to 1) indicate stronger correlations. In this case, correlations may be low, suggesting these metrics capture different aspects of user behavior.")
 
     col7, col8 = st.columns(2)
-    display_plot("Top 5 Most Reviewed Businesses", plot_checkins_by_weekday, col7)
+    display_plot("Top 5 Most Reviewed Businesses", plot_checkins_by_weekday, col7, "This bar chart shows how customer check-ins vary across weekdays. It highlights which days are most popular for visiting businesses — for example, weekends may have more check-ins, indicating peak business activity.")
+    display_plot("Top 5 Most Reviewed Businesses", plot_top_10_tip_length_by_state, col8, "This chart analyzes the average length of text left in tips by users in each state. It reflects how expressive or detailed users tend to be in different regions. States with longer tips may show more engaged or thoughtful customer feedback.")
 
     col9, col10 = st.columns(2)
-    display_plot("Top 5 Most Reviewed Businesses", plot_top_10_tip_length_by_state, col8)
-    display_plot("Correlation Matrix", plot_average_stars_for_top_categories, col9)
+    display_plot("Correlation Matrix", plot_average_stars_for_top_categories, col9, "This bar chart identifies the top 10 cities with the most businesses in the dataset. It gives a geographical overview of business density, helping highlight urban areas with vibrant commercial activity.")
 
 if __name__ == "__main__":
 
