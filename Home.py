@@ -21,6 +21,7 @@ st.markdown(
     -   [Business, Checkin and Tip Joined Analysis](Buisness_Checkin_Tip_Combined_Analysis)
     -   [Review Sentiment Analysis](Review_Analysis)
     -   [User Behavior Analysis](User_Analysis)
+    -   [Business Analysis](Business_Analysis)
     """,
     unsafe_allow_html=True
 )
