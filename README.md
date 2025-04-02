@@ -44,7 +44,6 @@ This stage involves processing the raw Yelp JSON data using Hadoop and pre-built
 1.  **Upload to Amazon S3:**
     * Create an S3 bucket to store your data and JAR files.
     * Upload the JAR files and the Yelp JSON datasets to this S3 bucket.
-    * *(Include a screenshot like the one you provided if it helps clarify your S3 structure)*
 
 2.  **Launch Amazon EMR Cluster:**
     * Launch an EMR cluster with Hadoop and Spark installed.
